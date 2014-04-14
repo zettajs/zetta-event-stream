@@ -1,12 +1,12 @@
-# Elroy Event Stream
+# Zetta Event Stream
 
-`npm install elroy-event-stream`
+`npm install zetta-event-stream`
 
 ```js
 
-var ElroyEvent = require('./index');
+var ZettaEvent = require('zetta-event-stream');
 
-var c = new ElroyEvent('ws://localhost:3000/events');
+var c = new ZettaEvent('ws://localhost:3000/events');
 c.on('open',function(){
   console.log('on open')
 
