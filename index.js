@@ -38,7 +38,7 @@ Client.prototype.subscribe = function(eventName, callback){
   });
 };
 
-Client.prototype.subscribe = function(eventName, data, callback){
+Client.prototype.publish = function(eventName, data, callback){
   var message = {
     cmd : 'publish',
     name: eventName,
