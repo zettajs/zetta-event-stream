@@ -1,6 +1,6 @@
-var events = require('events')
-  , util = require('util')  
-  , ws = require('ws');
+var events = require('events');
+var util = require('util');
+var ws = require('ws');
 
 var Client = module.exports = function(host){
   events.EventEmitter.call(this);
@@ -17,7 +17,7 @@ var Client = module.exports = function(host){
     try {
       var json = JSON.parse(data);
       self._pubSubEmitter.emit(json.destination,json.data);
-    }catch(err){
+    } catch(err) {
       console.error(err);
     }
   });
@@ -25,15 +25,25 @@ var Client = module.exports = function(host){
 };
 util.inherits(Client,events.EventEmitter);
 
-Client.prototype.subscribe = function(eventName,callback){
+Client.prototype.subscribe = function(eventName, callback){
   var self = this;
-  this.socket.send( JSON.stringify({cmd : 'subscribe',name : eventName}),function(err){
-    self._pubSubEmitter.on(eventName,callback);
-  });  
+
+  var message = {
+    cmd: 'subscribe',
+    name: eventName
+  };
+
+  this.socket.send(JSON.stringify(message),function(err) {
+    self._pubSubEmitter.on(eventName, callback);
+  });
 };
 
+Client.prototype.subscribe = function(eventName, data, callback){
+  var message = {
+    cmd : 'publish',
+    name: eventName,
+    data: data
+  };
 
-
-
-
-
+  this.socket.send(JSON.stringify(message), callback);  
+};

@@ -1,6 +1,6 @@
 {
   "name": "zetta-event-stream",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Websocket client for zetta cloud's event stream.",
   "main": "index.js",
   "scripts": {
